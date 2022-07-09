@@ -2,6 +2,8 @@ const { connect,upsertUser } = require('getstream');
 const bcrypt = require('bcrypt');
 const StreamChat = require('stream-chat').StreamChat;
 const crypto = require('crypto');
+const User=require('./../models/usermodel.js');
+const Channel=require('./../models/channelmodel.js')
 
 const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
@@ -125,6 +127,18 @@ const streamRegister = async (req, res) => { //added by Uma
       const hashedPassword = await bcrypt.hash(password, 10);
   
       const token = serverClient.createUserToken(userId);
+data={
+  
+  name:fullName,
+  username:username,
+  userid: userId,
+  phonenumber:phoneNumber, 
+      hashedpassword:hashedPassword,
+      token:token
+}
+ const newuser=await User.create(data);
+
+
       res.status(200).json({ token, fullName, username, userId, hashedPassword, phoneNumber  });
     } catch (error) {
       console.log(error);

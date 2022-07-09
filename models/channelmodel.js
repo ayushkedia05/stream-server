@@ -9,9 +9,7 @@ const channelSchema=new mongoose.Schema({
     channeladmin:{
         type: String
     },
-    channelmoderator:[{
-        type: String
-    }]
+    channelmoderator: [String]
 
 })
 

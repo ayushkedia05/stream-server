@@ -25,6 +25,7 @@ exports.createchannel=async(req,res)=>{
 exports.updatechannel=async(req,res)=>{
     try{
         var id = (req.params.id).trim();
+        console.log(req.body);
         const channels=await Channel.findByIdAndUpdate({_id: id},req.body,{
             new:true
     });
